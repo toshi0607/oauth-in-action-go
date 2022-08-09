@@ -48,7 +48,12 @@ app.get('/authorize', function(req, res){
 	/*
 	 * Send the user to the authorization server
 	 */
-	
+	var authorizeUrl = buildUrl(authServer.authorizationEndpoint, {
+		response_type: 'code',
+		client_id: client.client_id,
+		redirect_uri: client.redirect_uris[0]
+	});
+	res.redirect(authorizeUrl);
 });
 
 app.get('/callback', function(req, res){
